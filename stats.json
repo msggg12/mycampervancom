@@ -1,0 +1,217 @@
+{
+  "total": 28,
+  "pages": {
+    "/about": 23,
+    "/": 1,
+    "/vans": 1,
+    "/country-test": 1,
+    "/country-test-2": 1,
+    "/country-test-3": 1,
+    "/country-test-4": 1
+  },
+  "ips": {
+    "127.0.0.1": {
+      "count": 24,
+      "pages": {
+        "/": 1,
+        "/vans": 1,
+        "/about": 16
+      },
+      "last": "2025-10-09T14:28:36.951977Z",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    "8.8.8.8": {
+      "count": 4,
+      "pages": {
+        "/country-test": 1,
+        "/country-test-2": 1,
+        "/country-test-3": 1,
+        "/country-test-4": 1
+      },
+      "last": "2025-10-18T07:43:19.618615Z",
+      "ua": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.5624",
+      "country": "Unknown"
+    }
+  },
+  "log": [
+    {
+      "ts": "2025-09-30T15:03:39.659755Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T08:11:04.626314Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T08:11:04.902942Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T11:44:35.621076Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T11:44:35.724000Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T11:44:37.666359Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T11:44:37.745374Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:39:30.553064Z",
+      "ip": "127.0.0.1",
+      "path": "/",
+      "ua": "Test Browser"
+    },
+    {
+      "ts": "2025-10-09T12:39:52.031711Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:39:52.105957Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:45:42.136041Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:45:42.236167Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:49:25.625432Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:49:25.722546Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:49:58.676573Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T12:49:58.763242Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T13:28:21.975883Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T13:28:22.073049Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T14:26:53.655241Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T14:26:53.766491Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T14:27:08.224041Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T14:27:08.294444Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T14:28:36.899977Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-09T14:28:36.951977Z",
+      "ip": "127.0.0.1",
+      "path": "/about",
+      "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+    },
+    {
+      "ts": "2025-10-18T07:40:12.180776Z",
+      "ip": "8.8.8.8",
+      "path": "/country-test",
+      "ua": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.5624"
+    },
+    {
+      "ts": "2025-10-18T07:41:29.017071Z",
+      "ip": "8.8.8.8",
+      "path": "/country-test-2",
+      "ua": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.5624"
+    },
+    {
+      "ts": "2025-10-18T07:42:15.309741Z",
+      "ip": "8.8.8.8",
+      "path": "/country-test-3",
+      "ua": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.5624"
+    },
+    {
+      "ts": "2025-10-18T07:43:19.618615Z",
+      "ip": "8.8.8.8",
+      "path": "/country-test-4",
+      "ua": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.5624"
+    }
+  ],
+  "confirmed_revenue": 0,
+  "by_country_visits": {
+    "Unknown": 4
+  },
+  "geo_debug": {
+    "8.8.8.8": {
+      "ok": false,
+      "status_code": 429,
+      "text": "{\n    \"error\": true,\n    \"reason\": \"RateLimited\",\n    \"message\": \"Visit https://ipapi.co/ratelimited/ for details\"\n}"
+    }
+  }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Contact · Camper Vans Georgia</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XP1E3BG1E5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XP1E3BG1E5');
+</script>
+<body>
+	<header class="navbar navbar-transparent">
+		<div class="container navbar-inner" style="justify-content:space-between">
+			<a class="brand" href="/"><img class="brand-logo" src="/static/images/logo.png" alt="Camper Vans Georgia"/></a>
+			<nav class="nav">
+				<a href="/">Home</a>
+				<a href="/about">About us</a>
+				<a href="/vans">Rent</a>
+				<a href="/contact" class="contact-pill">Contact</a>
+			</nav>
+		</div>
+	</header>
+	<!-- Video background -->
+	<div class="hero-wrap">
+		<div class="hero-bg">
+			<video class="hero-video" autoplay muted loop playsinline  disablepictureinpicture>
+				<source src="/static/images/Gomismtadron0377.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="bg-overlay"></div>
+		</div>
+		<div class="container" style="position: relative; z-index: 1;">
+		</div>
+	</div>
+	<section class="section">
+		<div class="inner" style="max-width:760px;">
+			<p class="lead" id="contact-intro">Send us a message and we'll reply by email shortly.</p>
+			<div class="panel" style="margin-top:10px;">
+				<form id="contact-form" style="display:grid; gap:10px;">
+					<label>Name<input id="name" name="name" placeholder="Your name" required class="input"/></label>
+					<label>Email<input id="email" name="email" type="email" placeholder="your@email.com" required class="input"/></label>
+					<label>Message<textarea id="message" name="message" placeholder="Your message" rows="6" required class="input"></textarea></label>
+					<button class="btn" type="submit">Send</button>
+				</form>
+				<div id="status" class="meta" style="margin-top:8px;"></div>
+			</div>
+			<div class="meta" style="margin-top:10px">Or email us directly: <a href="mailto:info@mycampervans.com" id="contact-direct-email">info@mycampervans.com</a></div>
+		</div>
+	</section>
+	<section class="section" style="padding-top:0">
+		<div class="inner">
+			<h2 class="h2" id="contact-section-title">Get in Touch</h2>
+			<div class="amenities">
+				<div class="amenity" id="contact-email">📧 <a href="mailto:info@mycampervans.com">info@mycampervans.com</a></div>
+				<div class="amenity" id="contact-phone">📱 <a href="https://wa.me/995577373739" target="_blank" rel="noopener">+995 577 373 739</a></div>
+				<div class="amenity" id="contact-location">📍 Tbilisi, Georgia</div>
+				<div class="amenity" id="contact-hours">🕒 24/7 Support</div>
+			</div>
+		</div>
+	</section>
+	<section class="section" style="padding-top:0">
+		<div class="inner">
+			<h2 class="h2" id="faq-title">Frequently Asked Questions</h2>
+			<div class="faq">
+				<div class="faq-item">
+					<div class="faq-q" id="faq1-q">How do I book a campervan?</div>
+					<div class="faq-a" id="faq1-a">Simply browse our available vans, select your dates, and fill out the booking form. We'll contact you within 24 hours to confirm your reservation.</div>
+				</div>
+				<div class="faq-item">
+					<div class="faq-q" id="faq2-q">What's included with the rental?</div>
+					<div class="faq-a" id="faq2-a">All our vans come with fresh bedding, kitchen equipment, camping chairs, and 24/7 roadside assistance. Everything you need for a comfortable journey.</div>
+				</div>
+				<div class="faq-item">
+					<div class="faq-q" id="faq3-q">Do you offer airport pickup?</div>
+					<div class="faq-a" id="faq3-a">Yes! We can arrange airport pickup and drop-off for an additional fee. Contact us for more details.</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="site-footer">
+		<div class="footer-grid">
+			<div>
+				<h4>Camper Vans Georgia</h4>
+				<div id="footer-description">Explore Georgia with comfort.</div>
+			</div>
+			<div>
+				<h4>Contact</h4>
+				<div>Email: <a href="mailto:info@mycampervans.com" id="footer-email-link">info@mycampervans.com</a></div>
+				<div>Phone: <a href="https://wa.me/995577373739" target="_blank" rel="noopener" id="footer-phone-link">+995 577 373 739</a></div>
+				<div id="footer-location">Tbilisi, Georgia</div>
+				<div id="footer-hours">Hours: 24/7 Support</div>
+			</div>
+			<div>
+				<h4>Services</h4>
+				<div id="footer-service1">Campervan rentals</div>
+				<div id="footer-service2">Route planning</div>
+				<div id="footer-service3">Airport pickup</div>
+			</div>
+			<div>
+				<h4>Useful</h4>
+				<a href="/about">About us</a><br/>
+				<a href="/vans">Rent</a>
+			</div>
+		</div>
+		<div class="footer-bottom">© <span id="year"></span> Camper Vans Georgia · All rights reserved</div>
+	</footer>
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+		document.getElementById('contact-form').addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const status = document.getElementById('status');
+			status.textContent = 'Sending...';
+			try {
+				const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: document.getElementById('name').value, email: document.getElementById('email').value, message: document.getElementById('message').value }) });
+				const data = await res.json();
+				if (data.ok) { status.textContent = 'Sent! We will get back to you soon.'; (document.getElementById('contact-form')).reset(); }
+				else { status.textContent = 'Error: ' + (data.error || 'Failed'); }
+			} catch (err) { status.textContent = 'Network error'; }
+		});
+		
+		// Load site content from API
+		async function loadSiteContent() {
+			try {
+				const response = await fetch('/api/site-content');
+				const content = await response.json();
+				
+				// Prefer admin-saved keys (content.contact and content.faq). Fall back to legacy content.contact_page.
+				const contactSrc = content.contact || content.contact_page || {};
+				if (contactSrc.intro) document.getElementById('contact-intro').textContent = contactSrc.intro;
+				if (contactSrc.direct_email || contactSrc.email) {
+					const emailVal = contactSrc.direct_email || contactSrc.email;
+					const emailEl = document.getElementById('contact-direct-email');
+					emailEl.textContent = emailVal;
+					emailEl.href = 'mailto:' + emailVal;
+				}
+				if (contactSrc.section_title) document.getElementById('contact-section-title').textContent = contactSrc.section_title;
+
+				// FAQ: admin stores FAQs under content.faq; legacy pages put them under contact_page as faq1_q / faq1_a
+				const faqSrc = content.faq || contactSrc || {};
+				if (faqSrc.faq_title) document.getElementById('faq-title').textContent = faqSrc.faq_title;
+				// Q1
+				if (faqSrc.q1) document.getElementById('faq1-q').textContent = faqSrc.q1;
+				else if (faqSrc.faq1_q) document.getElementById('faq1-q').textContent = faqSrc.faq1_q;
+				if (faqSrc.a1) document.getElementById('faq1-a').textContent = faqSrc.a1;
+				else if (faqSrc.faq1_a) document.getElementById('faq1-a').textContent = faqSrc.faq1_a;
+				// Q2
+				if (faqSrc.q2) document.getElementById('faq2-q').textContent = faqSrc.q2;
+				else if (faqSrc.faq2_q) document.getElementById('faq2-q').textContent = faqSrc.faq2_q;
+				if (faqSrc.a2) document.getElementById('faq2-a').textContent = faqSrc.a2;
+				else if (faqSrc.faq2_a) document.getElementById('faq2-a').textContent = faqSrc.faq2_a;
+				// Q3
+				if (faqSrc.q3) document.getElementById('faq3-q').textContent = faqSrc.q3;
+				else if (faqSrc.faq3_q) document.getElementById('faq3-q').textContent = faqSrc.faq3_q;
+				if (faqSrc.a3) document.getElementById('faq3-a').textContent = faqSrc.a3;
+				else if (faqSrc.faq3_a) document.getElementById('faq3-a').textContent = faqSrc.faq3_a;
+				
+				// Footer (shared across pages)
+				if (content.footer) {
+					if (content.footer.company_description) document.getElementById('footer-description').textContent = content.footer.company_description;
+					if (content.footer.contact_email) {
+						document.getElementById('footer-email-link').textContent = content.footer.contact_email;
+						document.getElementById('footer-email-link').href = 'mailto:' + content.footer.contact_email;
+					}
+					if (content.footer.contact_phone) {
+						document.getElementById('footer-phone-link').textContent = content.footer.contact_phone;
+						const phoneNumber = content.footer.contact_phone.replace(/\D/g, '');
+						document.getElementById('footer-phone-link').href = 'https://wa.me/' + phoneNumber;
+					}
+					if (content.footer.contact_location) document.getElementById('footer-location').textContent = content.footer.contact_location;
+					if (content.footer.contact_hours) document.getElementById('footer-hours').textContent = content.footer.contact_hours;
+					if (content.footer.service1) document.getElementById('footer-service1').textContent = content.footer.service1;
+					if (content.footer.service2) document.getElementById('footer-service2').textContent = content.footer.service2;
+					if (content.footer.service3) document.getElementById('footer-service3').textContent = content.footer.service3;
+				}
+			} catch (e) {
+				console.error('Error loading site content:', e);
+			}
+		}
+		
+		loadSiteContent();
+	</script>
+	<script src="/static/navbar.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Env / secrets
+venv/
+.env
+config.json
+
+# Socket / pid
+*.sock
+*.pid
+# Large media
+*.mov
+*.MOV

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Rent · Camper Vans Georgia</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XP1E3BG1E5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XP1E3BG1E5');
+</script>
+<body>
+	<div class="page-accent"></div>
+	<header class="navbar navbar-transparent">
+		<div class="container navbar-inner" style="justify-content:space-between">
+			<a class="brand" href="/"><img class="brand-logo" src="/static/images/logo.png" alt="Camper Vans Georgia"/></a>
+			<nav class="nav">
+				<a href="/">Home</a>
+				<a href="/about">About us</a>
+				<a href="/vans">Rent</a>
+				<a href="/contact" class="contact-pill">Contact</a>
+			</nav>
+		</div>
+	</header>
+	<!-- Video background -->
+	<div class="hero-wrap">
+		<div class="hero-bg">
+			<video class="hero-video" autoplay muted loop playsinline  disablepictureinpicture>
+				<source src="/static/images/Gomismtadron0377.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="bg-overlay"></div>
+		</div>
+		<div class="container" style="position: relative; z-index: 1;">
+		</div>
+	</div>
+	<section class="section">
+		<div class="inner">
+			<div class="grid" id="featured">
+				<!-- Vehicles loaded dynamically via vans.js -->
+			</div>
+		</div>
+	</section>
+	<footer class="site-footer">
+		<div class="footer-grid">
+			<div>
+				<h4>Camper Vans Georgia</h4>
+				<div>Explore Georgia with comfort.</div>
+			</div>
+			<div>
+				<h4>Contact</h4>
+				<div>Email: <a href="mailto:info@mycampervans.com">info@mycampervans.com</a></div>
+				<div>Phone: <a href="https://wa.me/995577373739" target="_blank" rel="noopener">+995 577 373 739</a></div>
+				<div>Tbilisi, Georgia</div>
+				<div>Hours: 24/7 Support</div>
+			</div>
+			<div>
+				<h4>Services</h4>
+				<div>Campervan rentals</div>
+				<div>Route planning</div>
+				<div>Airport pickup</div>
+			</div>
+			<div>
+				<h4>Useful</h4>
+				<a href="/about">About us</a><br/>
+				<a href="/vans">Rent</a>
+			</div>
+		</div>
+		<div class="footer-bottom">© <span id="year"></span> Camper Vans Georgia · All rights reserved</div>
+	</footer>
+	<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+	<script src="/static/navbar.js"></script>
+	<script src="/static/vans.js"></script>
+</body>
+</html>

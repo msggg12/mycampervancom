@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>About us · Camper Vans Georgia</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XP1E3BG1E5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XP1E3BG1E5');
+</script>
+<body>
+	<header class="navbar navbar-transparent">
+		<div class="container navbar-inner" style="justify-content:space-between">
+			<a class="brand" href="/"><img class="brand-logo" src="/static/images/logo.png" alt="Camper Vans Georgia"/></a>
+			<nav class="nav">
+				<a href="/">Home</a>
+				<a href="/about" aria-current="page">About us</a>
+				<a href="/vans">Rent</a>
+				<a href="/contact" class="contact-pill">Contact</a>
+			</nav>
+		</div>
+	</header>
+	<!-- Video background -->
+	<div class="hero-wrap">
+		<div class="hero-bg">
+			<video class="hero-video" autoplay muted loop playsinline  disablepictureinpicture>
+				<source src="/static/images/Gomismtadron0377.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="bg-overlay"></div>
+		</div>
+		<div class="container" style="position: relative; z-index: 1;"></div>
+	</div>
+
+	<!-- Main intro -->
+	<section class="section">
+		<div class="inner two-col">
+			<div>
+				<h2 class="h2" id="about-page-title">Who we are</h2>
+				<p class="lead" id="about-page-intro">We're a small, family‑run rental in Georgia. Our mission is to make road trips easy and unforgettable with cozy, reliable vans and friendly service. One of the first campervan rental services in Georgia, we have more than five years of hosting experience. We've met many amazing travelers and helped them explore our beautiful country with comfort and flexibility.</p>
+				<p class="lead" id="about-page-details">Check‑in and check‑out are flexible — we can meet you at the airport, your hotel, or a location that works for you. We handle the details so you can enjoy the journey.</p>
+			</div>
+			<div>
+				<!-- Use a background div for the hero image to ensure cover behavior and avoid broken <img> icons -->
+				<div class="hero-img-bg" aria-hidden="true"></div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Amenities / Highlights (amenities restored, slider removed) -->
+	<section class="section" style="padding-top:0">
+		<div class="inner">
+			<div class="amenities" style="margin-bottom:16px">
+				<div class="amenity" id="about-highlight1">Local route planning</div>
+				<div class="amenity" id="about-highlight2">Airport pickup</div>
+				<div class="amenity" id="about-highlight3">24/7 support</div>
+				<div class="amenity" id="about-highlight4">Transparent pricing</div>
+			</div>
+			<div class="pricing" style="margin-top:8px">
+				<div class="price-card">
+					<div class="title">Comfort</div>
+					<div class="desc">Fresh linens, warm bedding, smart storage, and a restful sleep.</div>
+				</div>
+				<div class="price-card">
+					<div class="title">Reliability</div>
+					<div class="desc">Well‑maintained vans and roadside assistance if needed.</div>
+				</div>
+				<div class="price-card">
+					<div class="title">Ease</div>
+					<div class="desc">Simple pickup, quick handover, and clear guidance.</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer class="site-footer">
+		<div class="footer-grid">
+			<div>
+				<h4>Camper Vans Georgia</h4>
+				<div id="footer-description">Explore Georgia with comfort.</div>
+			</div>
+			<div>
+				<h4>Contact</h4>
+				<div>Email: <a href="mailto:info@mycampervans.com" id="footer-email-link">info@mycampervans.com</a></div>
+				<div>Phone: <a href="https://wa.me/995577373739" target="_blank" rel="noopener" id="footer-phone-link">+995 577 373 739</a></div>
+				<div id="footer-location">Tbilisi, Georgia</div>
+				<div id="footer-hours">Hours: 24/7 Support</div>
+			</div>
+			<div>
+				<h4>Services</h4>
+				<div id="footer-service1">Campervan rentals</div>
+				<div id="footer-service2">Route planning</div>
+				<div id="footer-service3">Airport pickup</div>
+			</div>
+			<div>
+				<h4>Useful</h4>
+				<a href="/about">About us</a><br/>
+				<a href="/vans">Rent</a>
+			</div>
+		</div>
+		<div class="footer-bottom">© <span id="year"></span> Camper Vans Georgia · All rights reserved</div>
+	</footer>
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+		
+		// Load site content from API
+		function setText(id, value) {
+			const el = document.getElementById(id);
+			if (el && value != null) el.textContent = value;
+		}
+
+		async function loadSiteContent() {
+			let content = null;
+			try {
+				const response = await fetch('/api/site-content');
+				content = await response.json();
+				
+				// Prefer admin-saved keys (content.about). Fall back to legacy content.about_page for older data.
+				const aboutSrc = content.about || content.about_page;
+				if (aboutSrc) {
+						if (aboutSrc.title) {
+							const el = document.getElementById('about-page-title'); if (el) el.textContent = aboutSrc.title;
+						}
+						if (aboutSrc.intro) { const el = document.getElementById('about-page-intro'); if (el) el.textContent = aboutSrc.intro; }
+						if (aboutSrc.details) { const el = document.getElementById('about-page-details'); if (el) el.textContent = aboutSrc.details; }
+					// Highlights: admin stores amenity1..6 on `about`, older pages used highlight1..4 — handle both
+					if (aboutSrc.highlight1) setText('about-highlight1', aboutSrc.highlight1);
+					else if (aboutSrc.amenity1) setText('about-highlight1', aboutSrc.amenity1);
+					if (aboutSrc.highlight2) setText('about-highlight2', aboutSrc.highlight2);
+					else if (aboutSrc.amenity2) setText('about-highlight2', aboutSrc.amenity2);
+					if (aboutSrc.highlight3) setText('about-highlight3', aboutSrc.highlight3);
+					else if (aboutSrc.amenity3) setText('about-highlight3', aboutSrc.amenity3);
+					if (aboutSrc.highlight4) setText('about-highlight4', aboutSrc.highlight4);
+					else if (aboutSrc.amenity4) setText('about-highlight4', aboutSrc.amenity4);
+					// Story/title mapping: admin may store details instead of separate story fields
+					if (aboutSrc.story_title) setText('about-story-title', aboutSrc.story_title);
+					if (aboutSrc.story_content) setText('about-story-content', aboutSrc.story_content);
+					else if (aboutSrc.details) setText('about-story-content', aboutSrc.details);
+				}
+				
+				// Cards and photo slider
+				const cardsContainer = document.getElementById('about-cards');
+				const sliderTrack = document.getElementById('about-slider-track');
+				const sliderEl = document.getElementById('about-slider');
+				const prevBtn = document.getElementById('about-prev');
+				const nextBtn = document.getElementById('about-next');
+
+				// (cards removed) No card rendering on About page
+
+				// Photos for slider: prefer content.about.photos
+				// photos are stored as objects {url, size}
+				const aboutPhotos = (content.about && content.about.photos) || [];
+				if (sliderTrack) sliderTrack.innerHTML = '';
+				aboutPhotos.forEach(p => {
+					const src = (typeof p === 'string') ? p : (p.url || '');
+					const size = (typeof p === 'object' && p.size) ? p.size : '360px';
+					if (!src) return;
+					const imgWrap = document.createElement('div');
+					imgWrap.style.minWidth = '100%';
+					imgWrap.style.boxSizing = 'border-box';
+					const img = document.createElement('img');
+					img.src = src;
+					img.style.width = '100%';
+					img.style.display = 'block';
+					img.style.objectFit = 'cover';
+					img.style.height = size;
+					imgWrap.appendChild(img);
+					if (sliderTrack) sliderTrack.appendChild(imgWrap);
+				});
+
+				// Simple slider behaviour
+				let sliderIndex = 0;
+				let sliderInterval = null;
+				function updateSlider() {
+					sliderTrack.style.transform = `translateX(-${sliderIndex * 100}%)`;
+				}
+				function startSlider() {
+					if (sliderInterval) clearInterval(sliderInterval);
+					sliderInterval = setInterval(() => {
+						sliderIndex = (sliderIndex + 1) % Math.max(1, aboutPhotos.length);
+						updateSlider();
+					}, 4000);
+				}
+				function stopSlider() { if (sliderInterval) clearInterval(sliderInterval); sliderInterval = null; }
+				if (aboutPhotos.length > 0) startSlider();
+				if (prevBtn && nextBtn) {
+					prevBtn.addEventListener('click', () => { sliderIndex = (sliderIndex - 1 + aboutPhotos.length) % aboutPhotos.length; updateSlider(); });
+					nextBtn.addEventListener('click', () => { sliderIndex = (sliderIndex + 1) % aboutPhotos.length; updateSlider(); });
+					sliderEl.addEventListener('mouseenter', stopSlider);
+					sliderEl.addEventListener('mouseleave', startSlider);
+				}
+
+				// Footer (shared across pages)
+				if (content.footer) {
+					if (content.footer.company_description) setText('footer-description', content.footer.company_description);
+					if (content.footer.contact_email) {
+						const el = document.getElementById('footer-email-link'); if (el) { el.textContent = content.footer.contact_email; el.href = 'mailto:' + content.footer.contact_email; }
+					}
+					if (content.footer.contact_phone) {
+						const el = document.getElementById('footer-phone-link'); if (el) { el.textContent = content.footer.contact_phone; const phoneNumber = content.footer.contact_phone.replace(/\D/g, ''); el.href = 'https://wa.me/' + phoneNumber; }
+					}
+					if (content.footer.contact_location) setText('footer-location', content.footer.contact_location);
+					if (content.footer.contact_hours) setText('footer-hours', content.footer.contact_hours);
+					if (content.footer.service1) setText('footer-service1', content.footer.service1);
+					if (content.footer.service2) setText('footer-service2', content.footer.service2);
+					if (content.footer.service3) setText('footer-service3', content.footer.service3);
+				}
+
+				// Prefer explicit hero image for the About page (use background div)
+				try {
+					console.log('About content loaded:', content && content.about);
+					if (content && content.about && content.about.heroImage) {
+						console.log('Setting about heroImage ->', content.about.heroImage);
+						const heroBg = document.querySelector('.hero-img-bg');
+						if (heroBg) {
+							heroBg.style.backgroundImage = `url('${content.about.heroImage}')`;
+							heroBg.style.backgroundSize = 'cover';
+							heroBg.style.backgroundPosition = 'center center';
+							heroBg.style.backgroundRepeat = 'no-repeat';
+							heroBg.style.visibility = 'visible';
+							heroBg.dataset.heroSet = 'true';
+						} else {
+							console.warn('hero-img-bg element not found');
+						}
+					} else {
+						console.log('No about.heroImage found in site content');
+					}
+				} catch (e) {
+					console.error('Error setting hero image:', e);
+				}
+			} catch (e) {
+				console.error('Error loading site content:', e);
+			}
+		}
+		
+		loadSiteContent();
+	</script>
+	<script src="/static/navbar.js"></script>
+</body>
+</html>

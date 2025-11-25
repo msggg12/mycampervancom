@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Admin Login · Camper Vans Georgia</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XP1E3BG1E5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XP1E3BG1E5');
+</script>
+<body>
+	<header class="navbar">
+		<div class="container navbar-inner">
+			<a class="brand" href="/"><span class="logo"></span> Camper Vans Georgia</a>
+		</div>
+	</header>
+	<section class="section">
+		<div class="inner" style="max-width:460px;">
+			<h1 class="h1">Admin Login</h1>
+			<div class="panel">
+				<div style="display:grid; gap:10px;">
+					<label>Username<input id="user" class="input" placeholder="admin"/></label>
+					<label>Password<input id="pass" class="input" type="password" placeholder="password"/></label>
+					<button class="btn" id="login">Login</button>
+					<div id="err" class="meta"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="container">© <span id="year"></span> Camper Vans Georgia</div>
+	</footer>
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+		document.getElementById('login').addEventListener('click', async () => {
+			const res = await fetch('/api/admin-login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: document.getElementById('user').value, password: document.getElementById('pass').value }) });
+			const data = await res.json();
+			if (data.ok) { location.href = '/admin'; } else { document.getElementById('err').textContent = data.error || 'Login failed'; }
+		});
+	</script>
+</body>
+</html>
+

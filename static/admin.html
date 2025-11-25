@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Admin · Camper Vans Georgia</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XP1E3BG1E5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XP1E3BG1E5');
+</script>
+<body>
+	<header class="navbar navbar-transparent">
+		<div class="container navbar-inner" style="justify-content:space-between">
+			<a class="brand" href="/"><img class="brand-logo" src="/static/images/logo.png" alt="Camper Vans Georgia"/></a>
+			<nav class="nav">
+				<a href="/">Home</a>
+				<a href="/vans">Rent</a>
+				<a href="/contact" class="contact-pill">Contact</a>
+				<button class="btn" id="logout">Logout</button>
+			</nav>
+		</div>
+	</header>
+	<div id="top-country-banner" style="background: linear-gradient(90deg,#0ea5e9, #7c3aed); color: white; padding: 10px 16px; font-weight:700; display:flex; gap:12px; align-items:center;">
+		<span>Top Country:</span>
+		<span id="top-country-banner-value">—</span>
+	</div>
+	<!-- Video background -->
+	<div class="hero-wrap">
+		<div class="hero-bg">
+			<video class="hero-video" autoplay muted loop playsinline  disablepictureinpicture>
+				<source src="/static/images/Gomismtadron0377.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="bg-overlay"></div>
+		</div>
+		<div class="container" style="position: relative; z-index: 1;">
+			<h1 class="h1" style="color: white; text-shadow: 0 2px 8px rgba(0,0,0,.8);">Admin Dashboard</h1>
+		</div>
+	</div>
+	<section class="section">
+		<div class="inner">
+			
+			<!-- Quick Stats Cards -->
+			<div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 24px;">
+				<div class="price-card" style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 16px; backdrop-filter: blur(15px);">
+					<div class="title">Total Bookings</div>
+					<div class="amount" id="total-bookings">0</div>
+					<div class="desc">All time</div>
+				</div>
+				<div class="price-card" style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 16px; backdrop-filter: blur(15px);">
+					<div class="title">Confirmed Revenue</div>
+					<div class="amount" id="total-revenue">$0</div>
+					<div class="desc">From confirmed bookings</div>
+				</div>
+				<div class="price-card" style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 16px; backdrop-filter: blur(15px);">
+					<div class="title">Unique Visitors</div>
+					<div class="amount" id="total-visits">0</div>
+					<div class="desc">1 IP = 1 visitor</div>
+				</div>
+				<div class="price-card" style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 16px; backdrop-filter: blur(15px);">
+					<div class="title">Contact Messages</div>
+					<div class="amount" id="total-messages">0</div>
+					<div class="desc">All time</div>
+				</div>
+				<div class="price-card" style="background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; padding: 16px; backdrop-filter: blur(15px);">
+					<div class="title">Top Country</div>
+					<div class="amount" id="top-country">—</div>
+					<div class="desc">Most visitor sessions</div>
+				</div>
+			</div>
+
+				<!-- Home editor injected dynamically in JS -->
+
+			<!-- Controls -->
+			<div class="panel" style="margin-bottom: 16px;">
+				<div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+					<button class="btn" id="refresh">🔄 Refresh</button>
+					<button class="btn" id="export-bookings">📊 Export Bookings</button>
+					<button class="btn" id="export-messages">📧 Export Messages</button>
+					<button class="btn" id="test-stats">📈 Add Test Stats</button>
+					<div class="meta">You are signed in via cookie (set on login).</div>
+				</div>
+			</div>
+
+			<!-- Page Navigation -->
+			<div class="panel" style="margin-bottom: 16px;">
+				<h2 class="h2">Quick Navigation</h2>
+				<div style="display: flex; gap: 12px; flex-wrap: wrap;">
+					<a href="/" class="btn" target="_blank" style="text-decoration: none;">🏠 Home</a>
+					<a href="/about" class="btn" target="_blank" style="text-decoration: none;">ℹ️ About</a>
+					<a href="/vans" class="btn" target="_blank" style="text-decoration: none;">🚐 Rent Vans</a>
+					<a href="/contact" class="btn" target="_blank" style="text-decoration: none;">📧 Contact</a>
+					<a href="/locations" class="btn" target="_blank" style="text-decoration: none;">📍 Locations</a>
+						</div>
+					</div>
+					
+			<!-- Page Content Editor -->
+			<div class="panel" style="overflow:auto; margin-bottom:16px;">
+				<h2 class="h2">📝 Page Content Editor</h2>
+				<p class="meta" style="margin-bottom: 16px;">Edit text content that appears on your website pages. Select a page below to start editing.</p>
+				
+				<div style="margin-bottom: 16px;">
+					<label style="display: block; margin-bottom: 8px; color: var(--muted); font-weight: 600;">Select Page to Edit:</label>
+					<select id="page-selector" style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px; width: 100%; max-width: 300px;">
+						<option value="">Choose a page to edit...</option>
+						<option value="home">🏠 Home Page</option>
+						<option value="about">ℹ️ About Page</option>
+						<option value="contact">📧 Contact Page</option>
+					</select>
+					</div>
+					
+				<div id="page-editor" style="display: none;">
+					<!-- Content will be loaded here dynamically -->
+					</div>
+					
+				<div id="page-editor-placeholder" style="text-align: center; padding: 40px; color: var(--muted);">
+					<div style="font-size: 48px; margin-bottom: 16px;">📝</div>
+					<div style="font-size: 18px; margin-bottom: 8px;">Select a page above to start editing</div>
+					<div style="font-size: 14px;">You can edit titles, descriptions, and other text content</div>
+						</div>
+					</div>
+					
+
+			<!-- Van Management (moved to top) -->
+			<div class="panel" style="overflow:auto; margin-bottom:16px;">
+				<h2 class="h2">Van Management</h2>
+				<div style="margin-bottom: 16px;">
+					<button class="btn" onclick="loadVans()" style="margin-right: 8px;">🔄 Load Vans</button>
+					<button class="btn" onclick="showAddVanForm()" style="margin-right: 8px; background: #10b981;">➕ Add New Van/Car</button>
+					<span id="van-status" class="meta">Click to load vans</span>
+				</div>
+				
+				<!-- Add Van Form (hidden by default) -->
+				<div id="add-van-form" style="display: none; background: rgba(255,255,255,.1); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+					<h3 style="margin: 0 0 16px; color: var(--text);">Add New Vehicle</h3>
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+						<div>
+							<label style="display: block; margin-bottom: 4px; color: var(--muted);">Name *</label>
+							<input type="text" id="new-van-name" placeholder="e.g., Red Campervan" 
+								style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+						</div>
+						<div>
+							<label style="display: block; margin-bottom: 4px; color: var(--muted);">Slug * (URL-friendly, e.g., red-van)</label>
+							<input type="text" id="new-van-slug" placeholder="e.g., red-van" 
+								style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+						</div>
+						<div>
+							<label style="display: block; margin-bottom: 4px; color: var(--muted);">Price per Night *</label>
+							<input type="number" id="new-van-price" placeholder="0" 
+								style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+						</div>
+						<div>
+							<label style="display: block; margin-bottom: 4px; color: var(--muted);">Airbnb iCal URL (optional)</label>
+							<input type="text" id="new-van-ical" placeholder="https://www.airbnb.com/calendar/ical/..." 
+								style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+						</div>
+					</div>
+					<div style="margin-top: 16px;">
+						<label style="display: block; margin-bottom: 4px; color: var(--muted);">Description *</label>
+						<textarea id="new-van-description" placeholder="Describe the vehicle..." rows="3"
+							style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);"></textarea>
+					</div>
+					<div style="margin-top: 12px;">
+						<label style="display: block; margin-bottom: 4px; color: var(--muted);">Equipment / Features (comma separated)</label>
+						<textarea id="new-van-equipment" placeholder="e.g., Double bed, Kitchen, Shower" rows="2"
+							style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);"></textarea>
+					</div>
+					<div style="margin-top: 16px; display: flex; gap: 8px;">
+						<button onclick="createVan()" class="btn" style="background: #10b981; color: white;">Create Vehicle</button>
+						<button onclick="hideAddVanForm()" class="btn">Cancel</button>
+					</div>
+				</div>
+				
+				<div id="van-management">
+					<div class="van-list" id="van-list">
+						<!-- Vans will be loaded here -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Recent Bookings (moved after Van Management) -->
+			<div class="panel" style="overflow:auto; margin-bottom:16px;">
+				<h2 class="h2">Recent Bookings</h2>
+				<div style="margin-bottom: 12px;">
+					<label>Filter by van: </label>
+					<select id="van-filter" style="margin-left: 8px;">
+						<option value="">All vans</option>
+					</select>
+					<label style="margin-left: 16px;">Status: </label>
+					<select id="status-filter" style="margin-left: 8px;">
+						<option value="">All</option>
+						<option value="recent">Last 7 days</option>
+						<option value="month">This month</option>
+					</select>
+				</div>
+				<table class="specs" id="table-bookings">
+					<thead>
+						<tr><th>Time (UTC)</th><th>Customer</th><th>Van</th><th>Dates</th><th>Nights</th><th>Total</th><th>Status</th><th>Contact</th><th>Actions</th></tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<!-- Contact Messages -->
+			<div class="panel" style="overflow:auto; margin-bottom:16px;">
+				<h2 class="h2">Contact Messages</h2>
+				<div style="margin-bottom: 12px;">
+					<label>Filter by date: </label>
+					<select id="message-filter" style="margin-left: 8px;">
+						<option value="">All messages</option>
+						<option value="recent">Last 7 days</option>
+						<option value="month">This month</option>
+					</select>
+				</div>
+				<table class="specs" id="table-messages">
+					<thead>
+						<tr><th>Time (UTC)</th><th>Name</th><th>Email</th><th>Message</th><th>Actions</th></tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+
+			<!-- Visitor Analytics (moved to bottom) -->
+			<div class="panel" style="overflow:auto;">
+				<h2 class="h2">Visitor Analytics</h2>
+				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+					<div>
+						<h3 class="h2">Page Views</h3>
+						<div id="page-stats">Loading...</div>
+					</div>
+					<div>
+						<h3 class="h2">Top IPs</h3>
+						<div id="ip-stats">Loading...</div>
+					</div>
+				</div>
+				<div style="margin-bottom:16px;">
+					<h3 class="h2">Visitors by Country</h3>
+					<div id="country-stats">Loading...</div>
+				</div>
+				<h3 class="h2">Recent Visits</h3>
+				<table class="specs" id="visits">
+					<thead><tr><th>Time (UTC)</th><th>IP</th><th>Path</th><th>User Agent</th></tr></thead>
+					<tbody>					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="container">© <span id="year"></span> Camper Vans Georgia · Admin</div>
+	</footer>
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+		
+		// Pagination settings
+		const ITEMS_PER_PAGE = 5;
+		let currentVisitorPage = 1;
+		let currentBookingPage = 1;
+		let currentMessagePage = 1;
+		
+		const tBodyBookings = document.querySelector('#table-bookings tbody');
+		const tBodyMessages = document.querySelector('#table-messages tbody');
+		let allMessages = [];
+		let allStats = {};
+
+		document.getElementById('logout').addEventListener('click', async ()=>{
+			try { await fetch('/api/admin-logout', { method: 'POST' }); } catch {}
+			location.href = '/admin';
+		});
+
+		// Export functions
+		document.getElementById('export-bookings').addEventListener('click', () => {
+			const bookings = allMessages.filter(m => m.type === 'booking');
+			const csv = 'Time,Van,Customer,Email,Phone,Dates,Nights,Total,Notes\n' +
+				bookings.map(b => `"${b.ts}","${b.slug}","${b.name||''}","${b.email||''}","${b.phone||''}","${b.start} → ${b.end}","${b.nights}","${b.total}","${b.notes||''}"`).join('\n');
+			downloadCSV(csv, 'bookings.csv');
+		});
+
+		document.getElementById('export-messages').addEventListener('click', () => {
+			const messages = allMessages.filter(m => m.type !== 'booking');
+			const csv = 'Time,Name,Email,Message\n' +
+				messages.map(m => `"${m.ts}","${m.name||''}","${m.email||''}","${m.message||''}"`).join('\n');
+			downloadCSV(csv, 'messages.csv');
+		});
+
+		document.getElementById('test-stats').addEventListener('click', async () => {
+			try {
+				const response = await fetch('/api/test-stats', { method: 'POST' });
+				const data = await response.json();
+				if (data.ok) {
+					alert('Test statistics added! Click Refresh to see them.');
+					loadAll();
+				} else {
+					alert('Error adding test stats: ' + (data.error || 'Unknown error'));
+				}
+			} catch (e) {
+				alert('Error: ' + e.message);
+			}
+		});
+
+		async function confirmBooking(bookingId) {
+			if (!confirm('Are you sure you want to confirm this booking? This will add the revenue to your total.')) {
+				return;
+			}
+			
+			try {
+				const response = await fetch('/api/admin/confirm-booking', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ booking_id: bookingId })
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Booking confirmed successfully! Revenue: $' + data.total.toFixed(2));
+					loadAll(); // Reload to show updated status and revenue
+				} else {
+					alert('Error confirming booking: ' + (data.error || 'Unknown error'));
+				}
+			} catch (e) {
+				alert('Error: ' + e.message);
+			}
+		}
+
+		async function undoBooking(bookingId) {
+			if (!confirm('Are you sure you want to undo this booking? This will remove the revenue from your total.')) {
+				return;
+			}
+			
+			try {
+				const response = await fetch('/api/admin/undo-booking', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ booking_id: bookingId })
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Booking undone successfully! Revenue removed: $' + data.total.toFixed(2));
+					loadAll(); // Reload to show updated status and revenue
+				} else {
+					alert('Error undoing booking: ' + (data.error || 'Unknown error'));
+				}
+			} catch (e) {
+				alert('Error: ' + e.message);
+			}
+		}
+
+		function downloadCSV(csv, filename) {
+			const blob = new Blob([csv], { type: 'text/csv' });
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = filename;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
+
+		// Filter functions
+		document.getElementById('van-filter').addEventListener('change', () => { currentBookingPage = 1; filterBookings(); });
+		document.getElementById('status-filter').addEventListener('change', () => { currentBookingPage = 1; filterBookings(); });
+		document.getElementById('message-filter').addEventListener('change', () => { currentMessagePage = 1; filterMessages(); });
+
+		function filterBookings() {
+			const vanFilter = document.getElementById('van-filter').value;
+			const statusFilter = document.getElementById('status-filter').value;
+			const bookings = allMessages.filter(m => m.type === 'booking');
+			
+			let filtered = bookings;
+			
+			if (vanFilter) {
+				filtered = filtered.filter(b => b.slug === vanFilter);
+			}
+			
+			if (statusFilter) {
+				const now = new Date();
+				const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+				const monthAgo = new Date(now.getFullYear(), now.getMonth(), 1);
+				
+				filtered = filtered.filter(b => {
+					const bookingDate = new Date(b.ts);
+					if (statusFilter === 'recent') return bookingDate >= weekAgo;
+					if (statusFilter === 'month') return bookingDate >= monthAgo;
+					return true;
+				});
+			}
+			
+			renderBookings(filtered);
+		}
+		
+		function filterMessages() {
+			const messageFilter = document.getElementById('message-filter').value;
+			const messages = allMessages.filter(m => m.type !== 'booking');
+			
+			let filtered = messages;
+			
+			if (messageFilter) {
+				const now = new Date();
+				const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+				const monthAgo = new Date(now.getFullYear(), now.getMonth(), 1);
+				
+				filtered = filtered.filter(m => {
+					const messageDate = new Date(m.ts);
+					if (messageFilter === 'recent') return messageDate >= weekAgo;
+					if (messageFilter === 'month') return messageDate >= monthAgo;
+					return true;
+				});
+			}
+			
+			renderMessages(filtered);
+		}
+
+		function renderBookings(bookings) {
+			tBodyBookings.innerHTML = '';
+			const reversed = bookings.slice().reverse();
+			
+			// Pagination
+			const totalPages = Math.ceil(reversed.length / ITEMS_PER_PAGE);
+			const startIdx = (currentBookingPage - 1) * ITEMS_PER_PAGE;
+			const endIdx = startIdx + ITEMS_PER_PAGE;
+			const pageItems = reversed.slice(startIdx, endIdx);
+			
+			pageItems.forEach(row => {
+				const tr = document.createElement('tr');
+				tr.className = 'row-booking';
+				const dates = `${row.start||''} → ${row.end||''}`;
+				const contact = row.email ? `<a href="mailto:${row.email}">${row.email}</a>` : 'No email';
+				const status = row.status || 'pending';
+				const statusColor = status === 'confirmed' ? '#10b981' : status === 'cancelled' ? '#ef4444' : '#f59e0b';
+				const actionButton = status === 'pending' ? 
+					`<button onclick="confirmBooking('${row.ts}')" class="btn" style="background: #10b981; color: white; padding: 4px 8px; font-size: 12px;">Confirm</button>` : 
+					status === 'confirmed' ?
+					`<button onclick="undoBooking('${row.ts}')" class="btn" style="background: #ef4444; color: white; padding: 4px 8px; font-size: 12px;">Undo</button>` :
+					`<span style="color: ${statusColor}; font-weight: bold;">${status}</span>`;
+				
+				tr.innerHTML = `
+					<td>${row.ts||''}</td>
+					<td>${row.name||'Unknown'}</td>
+					<td>${row.slug||''}</td>
+					<td>${dates}</td>
+					<td>${row.nights||''}</td>
+					<td>$${(row.total||0).toFixed ? row.total.toFixed(2) : row.total||''}</td>
+					<td style="color: ${statusColor}; font-weight: bold;">${status}</td>
+					<td>${contact}</td>
+					<td>${actionButton}</td>
+				`;
+				tBodyBookings.appendChild(tr);
+			});
+			
+			// Add pagination controls
+			const paginationRow = document.createElement('tr');
+			paginationRow.innerHTML = `<td colspan="9" style="text-align: center; padding: 16px;">
+				<div style="display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;">
+					<button class="btn" onclick="prevBookingPage()" ${currentBookingPage === 1 ? 'disabled' : ''}>← Previous</button>
+					<span>Page ${currentBookingPage} of ${totalPages || 1} (${reversed.length} total)</span>
+					<button class="btn" onclick="nextBookingPage()" ${currentBookingPage >= totalPages ? 'disabled' : ''}>Next →</button>
+				</div>
+			</td>`;
+			tBodyBookings.appendChild(paginationRow);
+		}
+		
+		window.prevBookingPage = function() {
+			if (currentBookingPage > 1) {
+				currentBookingPage--;
+				filterBookings();
+			}
+		}
+		
+		window.nextBookingPage = function() {
+			const bookings = allMessages.filter(m => m.type === 'booking');
+			const vanFilter = document.getElementById('van-filter').value;
+			const statusFilter = document.getElementById('status-filter').value;
+			let filtered = bookings;
+			if (vanFilter) filtered = filtered.filter(b => b.slug === vanFilter);
+			if (statusFilter) {
+				const now = new Date();
+				const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+				const monthAgo = new Date(now.getFullYear(), now.getMonth(), 1);
+				filtered = filtered.filter(b => {
+					const bookingDate = new Date(b.ts);
+					if (statusFilter === 'recent') return bookingDate >= weekAgo;
+					if (statusFilter === 'month') return bookingDate >= monthAgo;
+					return true;
+				});
+			}
+			const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+			if (currentBookingPage < totalPages) {
+				currentBookingPage++;
+				filterBookings();
+			}
+		}
+		
+		window.prevMessagePage = function() {
+			if (currentMessagePage > 1) {
+				currentMessagePage--;
+				filterMessages();
+			}
+		}
+		
+		window.nextMessagePage = function() {
+			const messages = allMessages.filter(m => m.type !== 'booking');
+			const messageFilter = document.getElementById('message-filter').value;
+			let filtered = messages;
+			if (messageFilter) {
+				const now = new Date();
+				const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+				const monthAgo = new Date(now.getFullYear(), now.getMonth(), 1);
+				filtered = filtered.filter(m => {
+					const messageDate = new Date(m.ts);
+					if (messageFilter === 'recent') return messageDate >= weekAgo;
+					if (messageFilter === 'month') return messageDate >= monthAgo;
+					return true;
+				});
+			}
+			const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+			if (currentMessagePage < totalPages) {
+				currentMessagePage++;
+				filterMessages();
+			}
+		}
+
+		function renderMessages(messages) {
+			tBodyMessages.innerHTML = '';
+			const reversed = messages.slice().reverse();
+			
+			// Pagination
+			const totalPages = Math.ceil(reversed.length / ITEMS_PER_PAGE);
+			const startIdx = (currentMessagePage - 1) * ITEMS_PER_PAGE;
+			const endIdx = startIdx + ITEMS_PER_PAGE;
+			const pageItems = reversed.slice(startIdx, endIdx);
+			
+			pageItems.forEach(row => {
+				const tr = document.createElement('tr');
+				const emailLink = row.email ? `<a href="mailto:${row.email}">${row.email}</a>` : 'No email';
+				tr.innerHTML = `
+					<td>${row.ts||''}</td>
+					<td>${row.name||''}</td>
+					<td>${emailLink}</td>
+					<td>${row.message||''}</td>
+					<td>
+						${row.email ? `<a href="mailto:${row.email}?subject=Re: Your inquiry&body=Hi ${row.name},\n\nThank you for your message:\n\n"${row.message}"\n\nBest regards," class="btn" style="font-size:12px; padding:4px 8px;">Reply</a>` : ''}
+					</td>
+				`;
+				tBodyMessages.appendChild(tr);
+			});
+			
+			// Add pagination controls
+			const paginationRow = document.createElement('tr');
+			paginationRow.innerHTML = `<td colspan="5" style="text-align: center; padding: 16px;">
+				<div style="display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;">
+					<button class="btn" onclick="prevMessagePage()" ${currentMessagePage === 1 ? 'disabled' : ''}>← Previous</button>
+					<span>Page ${currentMessagePage} of ${totalPages || 1} (${reversed.length} total)</span>
+					<button class="btn" onclick="nextMessagePage()" ${currentMessagePage >= totalPages ? 'disabled' : ''}>Next →</button>
+				</div>
+			</td>`;
+			tBodyMessages.appendChild(paginationRow);
+		}
+
+		async function loadAll() {
+			try {
+				const [mRes, sRes] = await Promise.all([
+					fetch('/api/messages'),
+					fetch('/api/stats')
+				]);
+				if (mRes.status === 401 || sRes.status === 401) { 
+					alert('Please login again.'); 
+					location.href = '/admin'; 
+					return; 
+				}
+				
+				allMessages = await mRes.json();
+				allStats = await sRes.json();
+				
+				// Update stats cards
+				const bookings = allMessages.filter(m => m.type === 'booking');
+				const messages = allMessages.filter(m => m.type !== 'booking');
+				const confirmedRevenue = allStats.confirmed_revenue || 0;
+				const uniqueVisitors = allStats.unique_visitors || 0;
+				
+				document.getElementById('total-bookings').textContent = bookings.length;
+				document.getElementById('total-revenue').textContent = `$${confirmedRevenue.toFixed(2)}`;
+				document.getElementById('total-visits').textContent = uniqueVisitors;
+				document.getElementById('total-messages').textContent = messages.length;
+
+				// Top country - pick the country with the most visits
+				const countryVisits = allStats.by_country_visits || {};
+				const topCountryEntry = Object.entries(countryVisits).sort((a,b)=>b[1]-a[1])[0];
+				if (topCountryEntry) {
+					document.getElementById('top-country').textContent = `${topCountryEntry[0]} ${topCountryEntry[1]}`;
+					// also set banner
+					document.getElementById('top-country-banner-value').textContent = `${topCountryEntry[0]} ${topCountryEntry[1]}`;
+				} else {
+					document.getElementById('top-country').textContent = '—';
+					document.getElementById('top-country-banner-value').textContent = '—';
+				}
+				
+				// Populate van filter
+				const vanFilter = document.getElementById('van-filter');
+				const vans = [...new Set(bookings.map(b => b.slug).filter(Boolean))];
+				vanFilter.innerHTML = '<option value="">All vans</option>' + 
+					vans.map(v => `<option value="${v}">${v}</option>`).join('');
+				
+				// Render tables
+				filterBookings();
+				filterMessages();
+				
+				// Update analytics
+				const pages = allStats.pages || {};
+				const ips = allStats.ips || {};
+				
+				document.getElementById('page-stats').innerHTML = 
+					Object.entries(pages).map(([p,c]) => `${p}: ${c}`).join('<br/>') || 'No data';
+				
+				document.getElementById('ip-stats').innerHTML = 
+					Object.entries(ips).slice(0, 10).map(([ip, data]) => 
+						`${ip}: ${data.count} visits`).join('<br/>') || 'No data';
+
+				// Country stats (visits and unique IPs)
+				const byCountryVisits = allStats.by_country_visits || {};
+				const byCountryUnique = allStats.by_country_unique || {};
+				const countryLines = Object.keys(byCountryVisits).length === 0
+					? ['No data']
+					: Object.entries(byCountryVisits).sort((a,b)=>b[1]-a[1]).map(([c,v]) => {
+						const unique = byCountryUnique[c] || 0;
+						return `${c}: ${v} visits (${unique} unique)`;
+					});
+				document.getElementById('country-stats').innerHTML = countryLines.join('<br/>');
+				
+				// Fill visits table with pagination
+				const vBody = document.querySelector('#visits tbody');
+				vBody.innerHTML = '';
+				const allVisits = (allStats.log || []).slice().reverse();
+				const totalVisitPages = Math.ceil(allVisits.length / ITEMS_PER_PAGE);
+				const visitStartIdx = (currentVisitorPage - 1) * ITEMS_PER_PAGE;
+				const visitEndIdx = visitStartIdx + ITEMS_PER_PAGE;
+				const visitsPage = allVisits.slice(visitStartIdx, visitEndIdx);
+				
+				visitsPage.forEach(entry => {
+					const tr = document.createElement('tr');
+					const ua = entry.ua ? entry.ua.substring(0, 50) + '...' : '';
+					tr.innerHTML = `<td>${entry.ts}</td><td>${entry.ip}</td><td>${entry.path}</td><td>${ua}</td>`;
+					vBody.appendChild(tr);
+				});
+				
+				// Add pagination controls
+				const visitPaginationRow = document.createElement('tr');
+				visitPaginationRow.innerHTML = `<td colspan="4" style="text-align: center; padding: 16px;">
+					<div style="display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;">
+						<button class="btn" onclick="prevVisitorPage()" ${currentVisitorPage === 1 ? 'disabled' : ''}>← Previous</button>
+						<span>Page ${currentVisitorPage} of ${totalVisitPages || 1} (${allVisits.length} total)</span>
+						<button class="btn" onclick="nextVisitorPage()" ${currentVisitorPage >= totalVisitPages ? 'disabled' : ''}>Next →</button>
+					</div>
+				</td>`;
+				vBody.appendChild(visitPaginationRow);
+				
+			} catch (e) { 
+				console.error('Error loading admin data:', e);
+				alert('Error loading admin data'); 
+			}
+		}
+		
+		// Van Management
+		let allVans = [];
+		
+		function showAddVanForm() {
+			document.getElementById('add-van-form').style.display = 'block';
+		}
+		
+		function hideAddVanForm() {
+			document.getElementById('add-van-form').style.display = 'none';
+			// Clear form fields
+			document.getElementById('new-van-name').value = '';
+			document.getElementById('new-van-slug').value = '';
+			document.getElementById('new-van-price').value = '';
+			document.getElementById('new-van-ical').value = '';
+			document.getElementById('new-van-description').value = '';
+		}
+		
+		async function createVan() {
+			const name = document.getElementById('new-van-name').value.trim();
+			const slug = document.getElementById('new-van-slug').value.trim().toLowerCase();
+			const price = parseFloat(document.getElementById('new-van-price').value);
+			const ical = document.getElementById('new-van-ical').value.trim();
+			const description = document.getElementById('new-van-description').value.trim();
+			
+			// Validation
+			if (!name) {
+				alert('Please enter a vehicle name');
+				return;
+			}
+			if (!slug) {
+				alert('Please enter a slug (URL-friendly identifier)');
+				return;
+			}
+			if (!/^[a-z0-9-]+$/.test(slug)) {
+				alert('Slug must contain only lowercase letters, numbers, and hyphens');
+				return;
+			}
+			if (isNaN(price) || price < 0) {
+				alert('Please enter a valid price');
+				return;
+			}
+			if (!description) {
+				alert('Please enter a description');
+				return;
+			}
+			
+			try {
+				const response = await fetch('/api/admin/create-van', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						name: name,
+						slug: slug,
+						pricePerNight: price,
+						airbnbIcalUrl: ical,
+						description: description,
+						equipment: (document.getElementById('new-van-equipment').value || '').split(',').map(s => s.trim()).filter(Boolean),
+						photos: [],
+						imageUrl: ''
+					})
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Vehicle created successfully! You can now upload images for it.');
+					hideAddVanForm();
+					loadVans(); // Reload to show new van
+				} else {
+					alert('Error: ' + (data.error || 'Failed to create vehicle'));
+				}
+			} catch (e) {
+				alert('Error creating vehicle: ' + e.message);
+			}
+		}
+		
+		async function deleteVan(slug) {
+			if (!confirm(`Are you sure you want to delete the vehicle "${slug}"? This action cannot be undone.`)) {
+				return;
+			}
+			
+			try {
+				const response = await fetch('/api/admin/delete-van', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ slug: slug })
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Vehicle deleted successfully!');
+					loadVans(); // Reload to remove deleted van
+				} else {
+					alert('Error: ' + (data.error || 'Failed to delete vehicle'));
+				}
+			} catch (e) {
+				alert('Error deleting vehicle: ' + e.message);
+			}
+		}
+		
+		function editName(slug) {
+			const van = allVans.find(v => v.slug === slug);
+			if (!van) return;
+			
+			const currentName = van.name || '';
+			const newName = prompt('Edit name for ' + van.name + ':', currentName);
+			
+			if (newName === null) return; // User cancelled
+			
+			if (!newName.trim()) {
+				alert('Name cannot be empty');
+				return;
+			}
+			
+			updateVanField(slug, 'name', newName.trim());
+		}
+		
+		function editDescription(slug) {
+			const van = allVans.find(v => v.slug === slug);
+			if (!van) return;
+			
+			const currentDesc = van.description || '';
+			const newDesc = prompt('Edit description for ' + van.name + ':', currentDesc);
+			
+			if (newDesc === null) return; // User cancelled
+			
+			updateVanField(slug, 'description', newDesc.trim());
+		}
+
+		function editDescriptionSize(slug) {
+			const van = allVans.find(v => v.slug === slug);
+			if (!van) return;
+			const current = van.descriptionFontSize || '14px';
+			const newVal = prompt('Enter description font size (e.g. 14px):', current);
+			if (newVal === null) return;
+			if (!/^\d+px$/.test(newVal.trim())) { alert('Please provide a value like "16px"'); return; }
+			updateVanField(slug, 'descriptionFontSize', newVal.trim());
+		}
+	
+		function editEquipment(slug) {
+			const van = allVans.find(v => v.slug === slug);
+			if (!van) return;
+			const current = (Array.isArray(van.equipment) && van.equipment.length) ? van.equipment.join(', ') : '';
+			const newVal = prompt('Edit equipment/features (comma separated):', current);
+			if (newVal === null) return;
+			const arr = newVal.split(',').map(s => s.trim()).filter(Boolean);
+			updateVanField(slug, 'equipment', arr);
+		}
+
+	// Helper to safely get an element value by id (top-level)
+	function getVal(id) {
+		const el = document.getElementById(id);
+		if (!el) return '';
+		if ('value' in el) return el.value;
+		return el.textContent || '';
+	}
+
+	// About cards editor helpers
+	function addCardEditorNode(title = '', text = '', idx = null) {
+		const cardsEditor = document.getElementById('about-cards-editor');
+		if (!cardsEditor) return;
+		const node = document.createElement('div');
+		node.className = 'about-card-node';
+		node.style.border = '1px solid var(--border)';
+		node.style.padding = '10px';
+		node.style.borderRadius = '8px';
+		node.innerHTML = `
+			<input class="about-card-title" placeholder="Card title" value="${title}" style="width:100%; padding:6px; margin-bottom:6px;">
+			<textarea class="about-card-text" placeholder="Card text" rows="2" style="width:100%; padding:6px;">${text}</textarea>
+			<div style="margin-top:8px;"><button class="btn" type="button">Remove</button></div>
+		`;
+		const removeBtn = node.querySelector('button');
+		removeBtn.addEventListener('click', () => node.remove());
+		cardsEditor.appendChild(node);
+	}
+
+	function aboutAddCard() {
+		addCardEditorNode('', '');
+	}
+
+	async function aboutUploadPhoto() {
+		const input = document.getElementById('about-upload-file');
+		if (!input || !input.files || !input.files[0]) { alert('Select a file first'); return; }
+		const file = input.files[0];
+		const form = new FormData();
+		form.append('file', file);
+		try {
+			const res = await fetch('/api/admin/upload-about-image', { method: 'POST', body: form });
+			const data = await res.json();
+			if (data.ok) {
+				// add to photos list UI as an object with editable size
+				const photosList = document.getElementById('about-photos-list');
+				const div = document.createElement('div');
+				div.style.position = 'relative'; div.style.width='140px'; div.style.padding='8px'; div.style.border='1px solid var(--border)'; div.style.borderRadius='8px'; div.style.background='var(--bg)'; div.style.display='flex'; div.style.flexDirection='column'; div.style.alignItems='center';
+				const imgWrap = document.createElement('div'); imgWrap.style.width = '120px'; imgWrap.style.height = '70px'; imgWrap.style.overflow='hidden'; imgWrap.style.borderRadius='6px';
+				const img = document.createElement('img'); img.src = data.url; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover';
+				imgWrap.appendChild(img);
+				const sizeInput = document.createElement('input'); sizeInput.type='text'; sizeInput.value = (data.size || '360px'); sizeInput.placeholder='e.g. 360px'; sizeInput.style.marginTop='8px'; sizeInput.style.width='100%'; sizeInput.style.padding='6px'; sizeInput.style.borderRadius='6px'; sizeInput.style.border='1px solid var(--border)';
+				const btnRow = document.createElement('div'); btnRow.style.marginTop='8px'; btnRow.style.display='flex'; btnRow.style.gap='6px';
+				const rm = document.createElement('button'); rm.textContent = 'Remove'; rm.className='btn'; rm.style.background='#ef4444'; rm.style.color='white';
+				rm.onclick = async ()=>{ await aboutRemovePhoto(data.url); div.remove(); };
+				btnRow.appendChild(rm);
+				div.appendChild(imgWrap); div.appendChild(sizeInput); div.appendChild(btnRow);
+				div.dataset.url = data.url;
+				photosList.appendChild(div);
+				input.value = '';
+				alert('Uploaded');
+			} else { alert('Upload error: ' + (data.error || 'unknown')); }
+		} catch (e) { alert('Error uploading: ' + e.message); }
+	}
+
+	async function aboutRemovePhoto(url) {
+		try {
+			const res = await fetch('/api/admin/remove-about-image', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ image_url: url }) });
+			const data = await res.json();
+			if (!data.ok) console.warn('Remove photo response:', data);
+		} catch (e) { console.warn('Error removing about photo:', e); }
+	}
+
+	// Upload and set as About hero image
+	async function aboutReplaceHero() {
+		const input = document.getElementById('about-upload-file');
+		if (!input || !input.files || !input.files[0]) { alert('Select a file first'); return; }
+		const file = input.files[0];
+		const form = new FormData();
+		form.append('file', file);
+		try {
+			const res = await fetch('/api/admin/upload-about-image', { method: 'POST', body: form });
+			const data = await res.json();
+			if (data.ok && data.url) {
+				// Save the hero image URL to site_content.about.heroImage
+				const updates = { about: { heroImage: data.url } };
+				const resp = await fetch('/api/admin/update-site-content', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+				const rdata = await resp.json();
+				if (rdata.ok) {
+					alert('About hero replaced successfully');
+					input.value = '';
+					// Open the About page in a new tab with a cache-busting query so the admin can verify immediately
+					try { window.open('/about?nocache=' + Date.now(), '_blank'); } catch (e) { console.log('Could not open about page:', e); }
+				} else {
+					alert('Failed to update site content: ' + (rdata.error || rdata.message || 'unknown'));
+				}
+
+				// Set an existing uploaded photo as the About hero image
+				async function aboutSetAsHero(url) {
+					if (!url) return;
+					try {
+						const updates = { about: { heroImage: url } };
+						const resp = await fetch('/api/admin/update-site-content', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ updates }) });
+						const data = await resp.json();
+						if (data.ok) {
+							alert('Set as hero successfully');
+							try { window.open('/about?nocache=' + Date.now(), '_blank'); } catch (e) { console.log('Could not open about page:', e); }
+						} else {
+							alert('Failed to set as hero: ' + (data.error || data.message || 'unknown'));
+						}
+					} catch (e) { alert('Error: ' + e.message); }
+				}
+			} else {
+				alert('Upload error: ' + (data.error || 'unknown'));
+			}
+		} catch (e) { alert('Error uploading: ' + e.message); }
+	}
+
+	async function updateVanField(slug, field, value) {
+			try {
+				const response = await fetch('/api/admin/update-van', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						slug: slug,
+						updates: { [field]: value }
+					})
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Updated successfully!');
+					loadVans(); // Reload to show updated data
+				} else {
+					alert('Error: ' + (data.error || 'Failed to update'));
+				}
+                
+			} catch (e) {
+				alert('Error: ' + e.message);
+			}
+		}
+		
+		async function loadVans() {
+			const statusEl = document.getElementById('van-status');
+			try {
+				statusEl.textContent = 'Loading vans...';
+				console.log('Loading vans...');
+				const response = await fetch('/api/vans');
+				console.log('Response status:', response.status);
+				if (response.status === 401) {
+					alert('Please login again.');
+					location.href = '/admin';
+					return;
+				}
+				allVans = await response.json();
+				console.log('Loaded vans:', allVans);
+				statusEl.textContent = `Loaded ${allVans.length} vans`;
+				renderVans();
+			} catch (e) {
+				console.error('Error loading vans:', e);
+				statusEl.textContent = 'Error loading vans: ' + e.message;
+				alert('Error loading vans: ' + e.message);
+			}
+		}
+		
+		function renderVans() {
+			console.log('Rendering vans:', allVans);
+			const vanList = document.getElementById('van-list');
+			if (!vanList) {
+				console.error('van-list element not found');
+				return;
+			}
+			vanList.innerHTML = '';
+			
+			if (!allVans || allVans.length === 0) {
+				vanList.innerHTML = '<div style="color: var(--muted); padding: 20px; text-align: center;">No vans found</div>';
+				return;
+			}
+			
+			allVans.forEach(van => {
+				const vanDiv = document.createElement('div');
+				vanDiv.className = 'van-item';
+				vanDiv.style.cssText = `
+					border: 1px solid rgba(255,255,255,.2);
+					border-radius: 12px;
+					padding: 16px;
+					margin-bottom: 16px;
+					background: rgba(255,255,255,.08);
+					backdrop-filter: blur(15px);
+				`;
+				
+				vanDiv.innerHTML = `
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;">
+						<div>
+							<h3 style="margin: 0 0 8px; color: var(--text);">${van.name || van.slug}</h3>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Name:</label>
+								<div style="padding: 8px; background: rgba(0,0,0,.2); border-radius: 6px; margin-bottom: 4px; color: var(--text); font-size: 14px;">
+									${van.name || 'No name'}
+								</div>
+								<button onclick="editName('${van.slug}')" class="btn" style="padding: 6px 12px;">✏️ Edit Name</button>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Description:</label>
+								<div style="padding: 8px; background: rgba(0,0,0,.2); border-radius: 6px; margin-bottom: 4px; color: var(--text); font-size: 14px;">
+									${van.description || 'No description'}
+								</div>
+								<button onclick="editDescription('${van.slug}')" class="btn" style="padding: 6px 12px;">✏️ Edit Description</button>
+								<span style="margin-left:8px;">Font size: <strong id="desc-size-${van.slug}">${van.descriptionFontSize || '14px'}</strong></span>
+								<button onclick="editDescriptionSize('${van.slug}')" class="btn" style="padding: 6px 12px; margin-left:8px;">🔠 Edit Size</button>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Equipment / Features:</label>
+								<div style="padding: 8px; background: rgba(0,0,0,.2); border-radius: 6px; margin-bottom: 4px; color: var(--text); font-size: 14px;">
+									${(Array.isArray(van.equipment) && van.equipment.length) ? van.equipment.join(', ') : 'No equipment listed'}
+								</div>
+								<button onclick="editEquipment('${van.slug}')" class="btn" style="padding: 6px 12px;">✏️ Edit Equipment</button>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Price per night:</label>
+								<input type="number" id="price-${van.slug}" value="${van.pricePerNight || 0}" 
+									style="width: 100px; padding: 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								<button onclick="updateVanPrice('${van.slug}')" class="btn" style="margin-left: 8px; padding: 6px 12px;">Update Price</button>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Airbnb iCal URL:</label>
+								<input type="text" id="ical-${van.slug}" value="${van.airbnbIcalUrl || ''}" placeholder="https://www.airbnb.com/calendar/ical/..."
+									style="width: 100%; padding: 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 4px;">
+								<button onclick="updateVanIcal('${van.slug}')" class="btn" style="padding: 6px 12px;">Update iCal URL</button>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Airbnb Listing URL:</label>
+								<input type="text" id="airbnb-${van.slug}" value="${van.airbnbUrl || ''}" placeholder="https://www.airbnb.com/rooms/..."
+									style="width: 100%; padding: 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 4px;">
+								<button onclick="updateVanAirbnb('${van.slug}')" class="btn" style="padding: 6px 12px;">Update Airbnb URL</button>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted);">Upload New Image:</label>
+								<input type="file" id="file-${van.slug}" accept="image/*" style="margin-bottom: 8px;">
+								<button onclick="uploadVanImage('${van.slug}')" class="btn" style="padding: 6px 12px;">Upload Image</button>
+							</div>
+							<div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.1);">
+								<button onclick="deleteVan('${van.slug}')" class="btn" style="background: #ef4444; color: white; padding: 6px 12px;">🗑️ Delete Vehicle</button>
+							</div>
+						</div>
+						<div>
+							<div style="margin-bottom: 8px; color: var(--muted);">Current Images:</div>
+							<div id="images-${van.slug}" style="display: flex; flex-wrap: wrap; gap: 8px;">
+								${(van.photos || []).map(photo => `
+									<div style="position: relative; display: inline-block;">
+										<img src="${photo}" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border);" alt="Van photo">
+										<button onclick="removeVanImage('${van.slug}', '${photo}')" 
+											style="position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 20px; height: 20px; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;">×</button>
+									</div>
+								`).join('')}
+							</div>
+						</div>
+					</div>
+				`;
+				
+				vanList.appendChild(vanDiv);
+			});
+		}
+		
+		async function updateVanPrice(slug) {
+			const priceInput = document.getElementById(`price-${slug}`);
+			const newPrice = parseFloat(priceInput.value);
+			
+			if (isNaN(newPrice) || newPrice < 0) {
+				alert('Please enter a valid price');
+				return;
+			}
+			
+			try {
+				const response = await fetch('/api/admin/update-van', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						slug: slug,
+						updates: { pricePerNight: newPrice }
+					})
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Price updated successfully!');
+					loadVans(); // Reload to show updated data
+				} else {
+					alert('Error: ' + (data.error || 'Failed to update price'));
+				}
+			} catch (e) {
+				alert('Error updating price: ' + e.message);
+			}
+		}
+		
+		async function updateVanIcal(slug) {
+			const icalInput = document.getElementById(`ical-${slug}`);
+			const newIcal = icalInput.value.trim();
+			
+			try {
+				const response = await fetch('/api/admin/update-van', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						slug: slug,
+						updates: { airbnbIcalUrl: newIcal }
+					})
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('iCal URL updated successfully!');
+					loadVans(); // Reload to show updated data
+				} else {
+					alert('Error: ' + (data.error || 'Failed to update iCal URL'));
+				}
+			} catch (e) {
+				alert('Error updating iCal URL: ' + e.message);
+			}
+		}
+		
+		async function updateVanAirbnb(slug) {
+			const airbnbInput = document.getElementById(`airbnb-${slug}`);
+			const newAirbnb = airbnbInput.value.trim();
+			
+			try {
+				const response = await fetch('/api/admin/update-van', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						slug: slug,
+						updates: { airbnbUrl: newAirbnb }
+					})
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Airbnb URL updated successfully!');
+					loadVans(); // Reload to show updated data
+				} else {
+					alert('Error: ' + (data.error || 'Failed to update Airbnb URL'));
+				}
+			} catch (e) {
+				alert('Error updating Airbnb URL: ' + e.message);
+			}
+		}
+		
+		async function uploadVanImage(slug) {
+			const fileInput = document.getElementById(`file-${slug}`);
+			const file = fileInput.files[0];
+			
+			if (!file) {
+				alert('Please select an image file');
+				return;
+			}
+			
+			const formData = new FormData();
+			formData.append('file', file);
+			formData.append('van_slug', slug);
+			
+			try {
+				const response = await fetch('/api/admin/upload-image', {
+					method: 'POST',
+					body: formData
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Image uploaded successfully!');
+					// Add the new image to the van's photos
+					const van = allVans.find(v => v.slug === slug);
+					if (van) {
+						if (!van.photos) van.photos = [];
+						van.photos.push(data.url);
+						
+						// Update the van in the config
+						await fetch('/api/admin/update-van', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify({
+								slug: slug,
+								updates: { photos: van.photos }
+							})
+						});
+					}
+					loadVans(); // Reload to show new image
+					fileInput.value = ''; // Clear the file input
+				} else {
+					alert('Error: ' + (data.error || 'Failed to upload image'));
+				}
+			} catch (e) {
+				alert('Error uploading image: ' + e.message);
+			}
+		}
+
+		async function removeVanImage(slug, imageUrl) {
+			if (!confirm('Are you sure you want to remove this image?')) {
+				return;
+			}
+			
+			try {
+				const response = await fetch('/api/admin/remove-image', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						van_slug: slug,
+						image_url: imageUrl
+					})
+				});
+				
+				const data = await response.json();
+				if (data.ok) {
+					alert('Image removed successfully!');
+					loadVans(); // Reload to show updated images
+				} else {
+					alert('Error: ' + (data.error || 'Failed to remove image'));
+				}
+			} catch (e) {
+				alert('Error removing image: ' + e.message);
+			}
+		}
+
+		document.getElementById('refresh').addEventListener('click', () => {
+			loadAll();
+			loadVans();
+		});
+		
+		// Visitor pagination functions
+		window.prevVisitorPage = function() {
+			if (currentVisitorPage > 1) {
+				currentVisitorPage--;
+				loadAll();
+			}
+		}
+		
+		window.nextVisitorPage = function() {
+			const allVisits = (allStats.log || []);
+			const totalPages = Math.ceil(allVisits.length / ITEMS_PER_PAGE);
+			if (currentVisitorPage < totalPages) {
+				currentVisitorPage++;
+				loadAll();
+			}
+		}
+		
+		
+		// Page Editor Functions
+		document.addEventListener('DOMContentLoaded', function() {
+			const pageSelector = document.getElementById('page-selector');
+			const editor = document.getElementById('page-editor');
+			const placeholder = document.getElementById('page-editor-placeholder');
+			
+			if (pageSelector) {
+				pageSelector.addEventListener('change', function() {
+					const page = this.value;
+					
+					if (!page) {
+						editor.style.display = 'none';
+						placeholder.style.display = 'block';
+						return;
+					}
+					
+					placeholder.style.display = 'none';
+					editor.style.display = 'block';
+					loadPageContent(page);
+				});
+			}
+		});
+		
+		async function loadPageContent(page) {
+			const editor = document.getElementById('page-editor');
+			
+			// Show loading state
+			editor.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--muted);"><div style="font-size: 24px; margin-bottom: 16px;">⏳</div><div>Loading page content...</div></div>';
+			
+			try {
+				const response = await fetch('/api/site-content');
+				
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				
+				const content = await response.json();
+				console.log('Loaded content:', content);
+				
+				let editorHTML = '';
+				
+				if (page === 'home') {
+					editorHTML = `
+						<!-- Hero Section -->
+						<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+							<h3 style="margin: 0 0 16px; color: var(--text);">🎯 Hero Section</h3>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Hero Title</label>
+								<input type="text" id="edit-hero-title" value="${content.hero?.title || 'Explore in comfort. Rent your next adventure.'}" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Hero Description</label>
+								<textarea id="edit-hero-description" rows="3" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">${content.hero?.description || 'First Campervan rental service in Georgia. Calendars sync with Airbnb to show busy days.'}</textarea>
+							</div>
+						</div>
+						
+						<!-- Features Section -->
+						<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+							<h3 style="margin: 0 0 16px; color: var(--text);">✨ Features Section</h3>
+							<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Feature 1 Title</label>
+									<input type="text" id="edit-feature1-title" value="${content.features?.feature1_title || '📅 Easy booking'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Feature 1 Description</label>
+									<textarea id="edit-feature1-description" rows="2" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.features?.feature1_description || 'Check availability and send a request in minutes.'}</textarea>
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Feature 2 Title</label>
+									<input type="text" id="edit-feature2-title" value="${content.features?.feature2_title || '🚐 Convenient pickup'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Feature 2 Description</label>
+									<textarea id="edit-feature2-description" rows="2" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.features?.feature2_description || 'We can meet you at the airport, your hotel, or a location that works for you.'}</textarea>
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Feature 3 Title</label>
+									<input type="text" id="edit-feature3-title" value="${content.features?.feature3_title || '🏠 All amenities'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Feature 3 Description</label>
+									<textarea id="edit-feature3-description" rows="2" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.features?.feature3_description || 'Everything you need for a comfortable road trip is included.'}</textarea>
+								</div>
+							</div>
+						</div>
+					`;
+				} else if (page === 'about') {
+					editorHTML = `
+						<!-- Who We Are Section -->
+						<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+							<h3 style="margin: 0 0 16px; color: var(--text);">👥 Who We Are</h3>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Page Title</label>
+								<input type="text" id="edit-about-title" value="${content.about?.title || 'Who we are'}" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Main Description</label>
+								<textarea id="edit-about-intro" rows="4" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">${content.about?.intro || 'We\'re a small, family‑run rental in Georgia. Our mission is to make road trips easy and unforgettable with cozy, reliable vans and friendly service. One of the first campervan rental services in Georgia, we have more than five years of hosting experience. We\'ve met many amazing travelers and helped them explore our beautiful country with comfort and flexibility.'}</textarea>
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Additional Details</label>
+								<textarea id="edit-about-details" rows="3" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">${content.about?.details || 'Check‑in and check‑out are flexible — we can meet you at the airport, your hotel, or a location that works for you. We handle the details so you can enjoy the journey.'}</textarea>
+							</div>
+						</div>
+						
+						<!-- Amenities Section -->
+						<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+							<h3 style="margin: 0 0 16px; color: var(--text);">✨ Our Amenities</h3>
+							<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Amenity 1</label>
+									<input type="text" id="edit-about-amenity1" value="${content.about?.amenity1 || 'Kitchen'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Amenity 2</label>
+									<input type="text" id="edit-about-amenity2" value="${content.about?.amenity2 || 'Bed'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Amenity 3</label>
+									<input type="text" id="edit-about-amenity3" value="${content.about?.amenity3 || 'Shower'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Amenity 4</label>
+									<input type="text" id="edit-about-amenity4" value="${content.about?.amenity4 || 'Toilet'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Amenity 5</label>
+									<input type="text" id="edit-about-amenity5" value="${content.about?.amenity5 || 'Heating'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Amenity 6</label>
+									<input type="text" id="edit-about-amenity6" value="${content.about?.amenity6 || 'Air conditioning'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">
+								</div>
+							</div>
+						</div>
+					`;
+						// About photos upload + manager (no card editor)
+							editorHTML += `
+							<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-top: 16px;">
+								<h3 style="margin:0 0 12px;">� About Photos (slider)</h3>
+								<div style="margin-top:12px;">
+									<label style="display:block; margin-bottom:6px;">Replace About Hero Image</label>
+									<input type="file" id="about-upload-file" accept="image/*">
+									<button class="btn" onclick="aboutReplaceHero()">Upload & Replace Hero</button>
+									<div id="about-photos-list" style="margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;"></div>
+									<div style="margin-top:8px; color: var(--muted); font-size:12px;">For each photo you can set height like "360px"</div>
+								</div>
+							</div>
+						`;
+				} else if (page === 'contact') {
+					editorHTML = `
+						<!-- Contact Intro Section -->
+						<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+							<h3 style="margin: 0 0 16px; color: var(--text);">📧 Contact Information</h3>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Intro Text</label>
+								<input type="text" id="edit-contact-intro" value="${content.contact?.intro || 'Send us a message and we\'ll reply by email shortly.'}" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">
+							</div>
+							<div style="margin-bottom: 12px;">
+								<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Direct Email</label>
+								<input type="text" id="edit-contact-email" value="${content.contact?.email || 'info@mycampervans.com'}" 
+									style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 16px;">
+							</div>
+						</div>
+						
+						<!-- FAQ Section -->
+						<div style="background: rgba(255,255,255,.08); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+							<h3 style="margin: 0 0 16px; color: var(--text);">❓ Frequently Asked Questions</h3>
+							<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Question 1</label>
+									<input type="text" id="edit-faq-q1" value="${content.faq?.q1 || 'What is included in the rental?'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Answer 1</label>
+									<textarea id="edit-faq-a1" rows="3" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.faq?.a1 || 'All amenities are included: kitchen, bed, shower, toilet, heating, and air conditioning.'}</textarea>
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Question 2</label>
+									<input type="text" id="edit-faq-q2" value="${content.faq?.q2 || 'Where can I pick up the van?'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Answer 2</label>
+									<textarea id="edit-faq-a2" rows="3" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.faq?.a2 || 'We can meet you at the airport, your hotel, or any convenient location in Tbilisi.'}</textarea>
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Question 3</label>
+									<input type="text" id="edit-faq-q3" value="${content.faq?.q3 || 'Do I need a special license?'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Answer 3</label>
+									<textarea id="edit-faq-a3" rows="3" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.faq?.a3 || 'A regular driving license is sufficient for our campervans.'}</textarea>
+								</div>
+								<div>
+									<label style="display: block; margin-bottom: 4px; color: var(--muted); font-weight: 600;">Question 4</label>
+									<input type="text" id="edit-faq-q4" value="${content.faq?.q4 || 'What about insurance?'}" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); margin-bottom: 8px;">
+									<label style="display: block; margin-bottom: 4px; color: var(--muted);">Answer 4</label>
+									<textarea id="edit-faq-a4" rows="3" 
+										style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text);">${content.faq?.a4 || 'Comprehensive insurance is included in the rental price.'}</textarea>
+								</div>
+							</div>
+						</div>
+					`;
+				}
+				
+				editorHTML += `
+					<div style="margin-top: 16px; display: flex; gap: 8px;">
+						<button onclick="savePageContent('${page}')" class="btn" style="background: #10b981; color: white; padding: 12px 24px;">💾 Save Changes</button>
+						<button onclick="loadPageContent('${page}')" class="btn" style="padding: 12px 24px;">🔄 Reload</button>
+						<span id="page-save-status" class="meta" style="line-height: 40px;"></span>
+					</div>
+				`;
+				
+				editor.innerHTML = editorHTML;
+
+				// If about page loaded, populate photos
+				if (page === 'about') {
+					const cardsEditor = document.getElementById('about-cards-editor');
+					const aboutCards = (content.about && content.about.cards) || [];
+					if (cardsEditor) {
+						cardsEditor.innerHTML = '';
+						aboutCards.forEach((c, idx) => addCardEditorNode(c.title, c.text, idx));
+					}
+					// populate photos as list with size editors
+					const photosList = document.getElementById('about-photos-list');
+					if (photosList) photosList.innerHTML = '';
+					const aboutPhotos = (content.about && content.about.photos) || [];
+					// normalize to objects { url, size }
+					const photosNormalized = aboutPhotos.map(p => (typeof p === 'string') ? { url: p, size: '360px' } : { url: p.url, size: p.size || '360px' });
+					photosNormalized.forEach((p, idx) => {
+						const div = document.createElement('div');
+						div.style.position = 'relative';
+						div.style.width = '140px';
+						div.style.padding = '8px';
+						div.style.border = '1px solid var(--border)';
+						div.style.borderRadius = '8px';
+						div.style.background = 'var(--bg)';
+						div.style.display = 'flex';
+						div.style.flexDirection = 'column';
+						div.style.alignItems = 'center';
+
+						const imgWrap = document.createElement('div');
+						imgWrap.style.width = '120px'; imgWrap.style.height = '70px'; imgWrap.style.overflow='hidden'; imgWrap.style.borderRadius='6px';
+						const img = document.createElement('img'); img.src = p.url;
+						img.style.width = '100%'; img.style.height = '100%'; img.style.objectFit='cover';
+						imgWrap.appendChild(img);
+
+						const sizeInput = document.createElement('input');
+						sizeInput.type = 'text'; sizeInput.value = p.size || '360px';
+						sizeInput.placeholder = 'e.g. 360px';
+						sizeInput.style.marginTop = '8px'; sizeInput.style.width = '100%'; sizeInput.style.padding='6px'; sizeInput.style.borderRadius='6px'; sizeInput.style.border='1px solid var(--border)';
+
+						const btnRow = document.createElement('div'); btnRow.style.marginTop='8px'; btnRow.style.display='flex'; btnRow.style.gap='6px';
+						const setHeroBtn = document.createElement('button'); setHeroBtn.textContent = 'Set as hero'; setHeroBtn.className = 'btn'; setHeroBtn.style.background = '#2563eb'; setHeroBtn.style.color = 'white';
+						setHeroBtn.onclick = async () => { await aboutSetAsHero(p.url); };
+						const rm = document.createElement('button'); rm.textContent = 'Remove'; rm.className='btn'; rm.style.background='#ef4444'; rm.style.color='white';
+						rm.onclick = async ()=>{ await aboutRemovePhoto(p.url); div.remove(); };
+						btnRow.appendChild(setHeroBtn);
+						btnRow.appendChild(rm);
+
+						div.appendChild(imgWrap);
+						div.appendChild(sizeInput);
+						div.appendChild(btnRow);
+						// store the url on the element for later collection
+						div.dataset.url = p.url;
+						if (photosList) photosList.appendChild(div);
+					});
+				}
+				
+			} catch (e) {
+				console.error('Error loading page content:', e);
+				editor.innerHTML = `
+					<div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; padding: 20px; text-align: center;">
+						<div style="font-size: 24px; margin-bottom: 16px;">❌</div>
+						<div style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Error loading page content</div>
+						<div style="color: var(--muted); font-size: 14px;">${e.message}</div>
+						<button onclick="loadPageContent('${page}')" class="btn" style="margin-top: 16px; padding: 8px 16px;">🔄 Try Again</button>
+					</div>
+				`;
+			}
+		}
+		
+		async function savePageContent(page) {
+			const statusEl = document.getElementById('page-save-status');
+			
+			try {
+				statusEl.textContent = 'Saving...';
+				
+				let updates = {};
+				
+				if (page === 'home') {
+					updates = {
+					hero: {
+							title: getVal('edit-hero-title'),
+							description: getVal('edit-hero-description')
+					},
+					features: {
+							feature1_title: getVal('edit-feature1-title'),
+							feature1_description: getVal('edit-feature1-description'),
+							feature2_title: getVal('edit-feature2-title'),
+							feature2_description: getVal('edit-feature2-description'),
+							feature3_title: getVal('edit-feature3-title'),
+							feature3_description: getVal('edit-feature3-description')
+					},
+					why: {
+						title: getVal('edit-why-title'),
+						description: getVal('edit-why-description'),
+						amenity1: getVal('edit-why-amenity1'),
+						amenity2: getVal('edit-why-amenity2'),
+						amenity3: getVal('edit-why-amenity3')
+					},
+					about: {
+							title: getVal('edit-about-title'),
+							description: getVal('edit-about-description'),
+							amenity1: getVal('edit-about-amenity1'),
+							amenity2: getVal('edit-about-amenity2'),
+							amenity3: getVal('edit-about-amenity3'),
+							amenity4: getVal('edit-about-amenity4'),
+							amenity5: getVal('edit-about-amenity5'),
+							amenity6: getVal('edit-about-amenity6')
+						}
+					};
+				} else if (page === 'about') {
+					updates = {
+						about: {
+							title: getVal('edit-about-title'),
+							intro: getVal('edit-about-intro'),
+							details: getVal('edit-about-details'),
+							amenity1: getVal('edit-about-amenity1'),
+							amenity2: getVal('edit-about-amenity2'),
+							amenity3: getVal('edit-about-amenity3'),
+							amenity4: getVal('edit-about-amenity4'),
+							amenity5: getVal('edit-about-amenity5'),
+							amenity6: getVal('edit-about-amenity6')
+						}
+					};
+					// Collect photos from photos list (each has url and size)
+					try {
+						const photoNodes = document.querySelectorAll('#about-photos-list > div');
+						if (photoNodes && photoNodes.length) {
+							updates.about.photos = [];
+							photoNodes.forEach(node => {
+								const url = node.dataset.url || (node.querySelector('img')?.src || '');
+								const size = node.querySelector('input')?.value || '360px';
+								if (url) updates.about.photos.push({ url: url, size: size });
+							});
+						}
+					} catch (e) { console.warn('Error collecting about photos:', e); }
+				} else if (page === 'contact') {
+					updates = {
+						contact: {
+							intro: getVal('edit-contact-intro'),
+							email: getVal('edit-contact-email')
+						},
+						faq: {
+							q1: getVal('edit-faq-q1'),
+							a1: getVal('edit-faq-a1'),
+							q2: getVal('edit-faq-q2'),
+							a2: getVal('edit-faq-a2'),
+							q3: getVal('edit-faq-q3'),
+							a3: getVal('edit-faq-a3'),
+							q4: getVal('edit-faq-q4'),
+							a4: getVal('edit-faq-a4')
+						}
+					};
+				}
+				
+				const response = await fetch('/api/admin/update-site-content', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ updates: updates })
+				});
+				
+				const data = await response.json();
+				
+				if (data.ok || data.message) {
+					statusEl.textContent = '✓ Saved successfully!';
+					statusEl.style.color = '#10b981';
+					setTimeout(() => { 
+						statusEl.textContent = ''; 
+						statusEl.style.color = '';
+					}, 3000);
+				} else {
+					statusEl.textContent = 'Error: ' + (data.error || 'Failed to save');
+					statusEl.style.color = '#ef4444';
+				}
+			} catch (e) {
+				console.error('Error saving page content:', e);
+				statusEl.textContent = 'Error: ' + e.message;
+				statusEl.style.color = '#ef4444';
+			}
+		}
+		
+		// Load data on page load
+		loadAll();
+		// Load vans after a short delay to ensure DOM is ready
+		setTimeout(loadVans, 100);
+	</script>
+	<script src="/static/navbar.js"></script>
+</body>
+</html>

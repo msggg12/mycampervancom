@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Van · Camper Vans Georgia</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+	<style>
+		/* Ensure booking row aligns with top split and calendar is on the right, wider */
+		.book-row { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; align-items: stretch; margin-top: 16px; }
+		/* Match panel heights */
+		.booking-panel, #calendar-wrap { height: 100%; }
+		/* Remove fixed min-height and constrain calendar to panel height */
+		#calendar-wrap { min-height: 0 !important; overflow: hidden; }
+		#calendar { max-height: 100%; overflow: auto; }
+		/* Make calendar more compact to match form height */
+		.book-row #calendar .cell { min-height: 36px; padding: 6px; }
+		@media (max-width: 900px) { .book-row { grid-template-columns: 1fr; } }
+	</style>
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XP1E3BG1E5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XP1E3BG1E5');
+</script>
+<body>
+	<header class="navbar navbar-transparent">
+		<div class="container navbar-inner" style="justify-content:space-between">
+			<a class="brand" href="/"><img class="brand-logo" src="/static/images/logo.png" alt="Camper Vans Georgia"/></a>
+			<nav class="nav">
+				<a href="/">Home</a>
+				<a href="/about">About us</a>
+				<a href="/vans">Rent</a>
+				<a href="/contact" class="contact-pill">Contact</a>
+			</nav>
+		</div>
+	</header>
+	<!-- Video background -->
+	<div class="hero-wrap">
+		<div class="hero-bg">
+			<video class="hero-video" autoplay muted loop playsinline  disablepictureinpicture>
+				<source src="/static/images/Gomismtadron0377.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="bg-overlay"></div>
+		</div>
+		<div class="container" style="position: relative; z-index: 1;">
+			<a href="/vans" class="back" style="color: white; text-shadow: 0 2px 8px rgba(0,0,0,.8);">← Back</a>
+			<h1 id="van-name" style="color: white; text-shadow: 0 2px 8px rgba(0,0,0,.8);">Van</h1>
+		</div>
+	</div>
+	<section class="container">
+		<div class="split">
+			<div>
+				<img id="van-image" class="hero-van" alt="Van" />
+				<div class="gallery-container">
+					<button class="gallery-nav prev" id="gallery-prev">‹</button>
+					<div id="gallery"></div>
+					<button class="gallery-nav next" id="gallery-next">›</button>
+				</div>
+			</div>
+			<div>
+				<div class="panel">
+					<div class="price" id="van-price"></div>
+					<div class="meta" id="van-meta"></div>
+					<div class="desc" id="van-desc">Price per night • Equipped with: bed, kitchen, table, shower...</div>
+				</div>
+			</div>
+		</div>
+		
+			<div class="book-row">
+				<div class="panel booking-panel">
+					<div id="booking-summary" class="meta">Select check‑in and check‑out on the calendar</div>
+					<div id="booking-total" class="price"></div>
+					<div id="booking-form" style="display:none;">
+						<div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+							<input id="customer-name" class="input" type="text" placeholder="Your name"/>
+							<input id="customer-email" class="input" type="email" placeholder="Your email"/>
+						</div>
+						<div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+							<input id="customer-phone" class="input" type="tel" placeholder="Phone number (optional)"/>
+							<select id="customer-location" class="input">
+								<option value="" disabled selected>Pickup location</option>
+								<option value="Tbilisi">Tbilisi</option>
+								<option value="Kutaisi">Kutaisi</option>
+								<option value="Batumi">Batumi</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+						<div style="margin-bottom:12px;">
+							<textarea id="customer-notes" class="input" placeholder="Additional notes or special requests (optional)" rows="3"></textarea>
+						</div>
+						<div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+							<button class="btn" id="proceed" disabled>Submit Booking Request</button>
+							<button class="btn" id="whatsapp" disabled style="background:linear-gradient(135deg,#10b981,#22c55e); color:#04140e; display:flex; align-items:center; gap:6px;"> <span>Send via WhatsApp</span></button>
+							<div id="book-status" class="meta"></div>
+						</div>
+					</div>
+				</div>
+				<div id="calendar-wrap">
+					<div class="nav"><button class="btn" id="prev">Prev</button><div id="month"></div><button class="btn" id="next">Next</button></div>
+					<div id="calendar"></div>
+				</div>
+			</div>
+			</section>
+	<footer class="site-footer">
+		<div class="footer-grid">
+			<div>
+				<h4>Camper Vans Georgia</h4>
+				<div>Explore Georgia with comfort.</div>
+			</div>
+			<div>
+				<h4>Contact</h4>
+				<div>Email: <a href="mailto:info@mycampervans.com">info@mycampervans.com</a></div>
+				<div>Phone: <a href="https://wa.me/995577373739" target="_blank" rel="noopener">+995 577 373 739</a></div>
+				<div>Tbilisi, Georgia</div>
+				<div>Hours: 24/7 Support</div>
+			</div>
+			<div>
+				<h4>Services</h4>
+				<div>Campervan rentals</div>
+				<div>Route planning</div>
+				<div>Airport pickup</div>
+			</div>
+			<div>
+				<h4>Useful</h4>
+				<a href="/about">About us</a><br/>
+				<a href="/vans">Rent</a>
+			</div>
+		</div>
+		<div class="footer-bottom">© <span id="year"></span> Camper Vans Georgia · All rights reserved</div>
+	</footer>
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+	</script>
+	<script src="/static/van.js"></script>
+	<script src="/static/navbar.js"></script>
+</body>
+</html>
